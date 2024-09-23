@@ -1,14 +1,11 @@
-const fastify = require('fastify')({ logger: true })
+const { Command } = require('commander');
+const program = new Command();
 
-// Declare a route
-fastify.get('/', function handler (request, reply) {
-  reply.send({ hello: 'world' })
-})
+program
+  .version('1.0.0')
+  .description('A simple hello world CLI')
+  .action(() => {
+    console.log('Hello World');
+  });
 
-// Run the server!
-fastify.listen({ port: 3000 }, (err) => {
-  if (err) {
-    fastify.log.error(err)
-    process.exit(1)
-  }
-})
+program.parse(process.argv);
